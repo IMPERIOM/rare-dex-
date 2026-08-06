@@ -1,0 +1,1602 @@
+[
+  {
+    "id": 1,
+    "variants": [
+      {
+        "kind": "case",
+        "typeLabel": "Case or Box",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": null,
+        "jpy": null,
+        "eur": null,
+        "cad": null
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "variants": [
+      {
+        "kind": "case",
+        "typeLabel": "Case(in 12boxes)",
+        "caseSize": 12,
+        "inStock": true,
+        "priceUsd": 571.66,
+        "jpy": 90000,
+        "eur": 495.612726,
+        "cad": 802.1311734,
+        "bundleQty": 1,
+        "bundlePriceUsd": 571.66,
+        "clearsFloorAsSingle": true,
+        "maxBulkQty": 87,
+        "maxBulkPriceUsd": 49734.42
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 47,
+        "jpy": 7400,
+        "eur": 40.75037969,
+        "cad": 65.95300759,
+        "bundleQty": 11,
+        "bundlePriceUsd": 517,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 1063,
+        "maxBulkPriceUsd": 49961
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "variants": [
+      {
+        "kind": "case",
+        "typeLabel": "Case(in 20boxes)",
+        "caseSize": 20,
+        "inStock": true,
+        "priceUsd": 838.44,
+        "jpy": 132000,
+        "eur": 726.8986648,
+        "cad": 1176.459054,
+        "bundleQty": 1,
+        "bundlePriceUsd": 838.44,
+        "clearsFloorAsSingle": true,
+        "maxBulkQty": 59,
+        "maxBulkPriceUsd": 49467.96
+      },
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 55.9,
+        "jpy": 8800,
+        "eur": 48.45991099,
+        "cad": 78.43060362,
+        "bundleQty": 9,
+        "bundlePriceUsd": 503.1,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 894,
+        "maxBulkPriceUsd": 49974.6
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 47.64,
+        "jpy": 7500,
+        "eur": 41.3010605,
+        "cad": 66.84426445,
+        "bundleQty": 11,
+        "bundlePriceUsd": 524.04,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 1049,
+        "maxBulkPriceUsd": 49974.36
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 43.19,
+        "jpy": 6800,
+        "eur": 37.44629485,
+        "cad": 60.60546643,
+        "bundleQty": 12,
+        "bundlePriceUsd": 518.28,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 1157,
+        "maxBulkPriceUsd": 49970.83
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "variants": [
+      {
+        "kind": "case",
+        "typeLabel": "Case(in 60boxes)",
+        "caseSize": 60,
+        "inStock": true,
+        "priceUsd": 1524.44,
+        "jpy": 240000,
+        "eur": 1321.633936,
+        "cad": 2139.016462,
+        "bundleQty": 1,
+        "bundlePriceUsd": 1524.44,
+        "clearsFloorAsSingle": true,
+        "maxBulkQty": 32,
+        "maxBulkPriceUsd": 48782.08
+      },
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 19.06,
+        "jpy": 3000,
+        "eur": 16.5204242,
+        "cad": 26.73770578,
+        "bundleQty": 27,
+        "bundlePriceUsd": 514.62,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 2623,
+        "maxBulkPriceUsd": 49994.38
+      }
+    ]
+  },
+  {
+    "id": 45,
+    "variants": [
+      {
+        "kind": "case",
+        "typeLabel": "Case(in 12Boxes)",
+        "caseSize": 12,
+        "inStock": true,
+        "priceUsd": 784.45,
+        "jpy": 123500,
+        "eur": 680.0907963,
+        "cad": 1100.702221,
+        "bundleQty": 1,
+        "bundlePriceUsd": 784.45,
+        "clearsFloorAsSingle": true,
+        "maxBulkQty": 63,
+        "maxBulkPriceUsd": 49420.35
+      },
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 60.34,
+        "jpy": 9500,
+        "eur": 52.31467663,
+        "cad": 84.66940164,
+        "bundleQty": 9,
+        "bundlePriceUsd": 543.06,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 828,
+        "maxBulkPriceUsd": 49961.52
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 47.64,
+        "jpy": 7500,
+        "eur": 41.3010605,
+        "cad": 66.84426445,
+        "bundleQty": 11,
+        "bundlePriceUsd": 524.04,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 1049,
+        "maxBulkPriceUsd": 49974.36
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 40.65,
+        "jpy": 6400,
+        "eur": 35.24357163,
+        "cad": 57.040439,
+        "bundleQty": 13,
+        "bundlePriceUsd": 528.45,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 1230,
+        "maxBulkPriceUsd": 49999.5
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 43.83,
+        "jpy": 6900,
+        "eur": 37.99697566,
+        "cad": 61.49672329,
+        "bundleQty": 12,
+        "bundlePriceUsd": 525.96,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 1140,
+        "maxBulkPriceUsd": 49966.2
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 55.26,
+        "jpy": 8700,
+        "eur": 47.90923018,
+        "cad": 77.53934676,
+        "bundleQty": 10,
+        "bundlePriceUsd": 552.6,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 904,
+        "maxBulkPriceUsd": 49955.04
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 49.54,
+        "jpy": 7800,
+        "eur": 42.95310292,
+        "cad": 69.51803503,
+        "bundleQty": 11,
+        "bundlePriceUsd": 544.94,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 1009,
+        "maxBulkPriceUsd": 49985.86
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "variants": [
+      {
+        "kind": "other",
+        "typeLabel": "7200.0",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 45.73,
+        "jpy": null,
+        "eur": 39.64901808,
+        "cad": 64.17049387,
+        "bundleQty": 11,
+        "bundlePriceUsd": 503.03,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 1093,
+        "maxBulkPriceUsd": 49982.89
+      }
+    ]
+  },
+  {
+    "id": 54,
+    "variants": [
+      {
+        "kind": "other",
+        "typeLabel": "21000.0",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 133.39,
+        "jpy": null,
+        "eur": 115.6429694,
+        "cad": 187.1639405,
+        "bundleQty": 4,
+        "bundlePriceUsd": 533.56,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 374,
+        "maxBulkPriceUsd": 49887.86
+      }
+    ]
+  },
+  {
+    "id": 55,
+    "variants": [
+      {
+        "kind": "other",
+        "typeLabel": "17700.0",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 112.43,
+        "jpy": null,
+        "eur": 97.47050278,
+        "cad": 157.7524641,
+        "bundleQty": 5,
+        "bundlePriceUsd": 562.15,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 444,
+        "maxBulkPriceUsd": 49918.92
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "variants": [
+      {
+        "kind": "other",
+        "typeLabel": "4500.0",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 28.58,
+        "jpy": null,
+        "eur": 24.7806363,
+        "cad": 40.10655867,
+        "bundleQty": 18,
+        "bundlePriceUsd": 514.44,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 1749,
+        "maxBulkPriceUsd": 49986.42
+      }
+    ]
+  },
+  {
+    "id": 57,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 121.32,
+        "jpy": 19100,
+        "eur": 105.1800341,
+        "cad": 170.2300601,
+        "bundleQty": 5,
+        "bundlePriceUsd": 606.6,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 412,
+        "maxBulkPriceUsd": 49983.84
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 184.84,
+        "jpy": 29100,
+        "eur": 160.2481147,
+        "cad": 259.3557461,
+        "bundleQty": 3,
+        "bundlePriceUsd": 554.52,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 270,
+        "maxBulkPriceUsd": 49906.8
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 185.47,
+        "jpy": 29200,
+        "eur": 160.7987956,
+        "cad": 260.2470029,
+        "bundleQty": 3,
+        "bundlePriceUsd": 556.41,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 269,
+        "maxBulkPriceUsd": 49891.43
+      }
+    ]
+  },
+  {
+    "id": 60,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 83.21,
+        "jpy": 13100,
+        "eur": 72.13918568,
+        "cad": 116.7546486,
+        "bundleQty": 7,
+        "bundlePriceUsd": 582.47,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 600,
+        "maxBulkPriceUsd": 49926
+      }
+    ]
+  },
+  {
+    "id": 61,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box(No Shrink)",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 80.03,
+        "jpy": 12600,
+        "eur": 69.38578164,
+        "cad": 112.2983643,
+        "bundleQty": 7,
+        "bundlePriceUsd": 560.21,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 624,
+        "maxBulkPriceUsd": 49938.72
+      }
+    ]
+  },
+  {
+    "id": 63,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 79.4,
+        "jpy": 12500,
+        "eur": 68.83510084,
+        "cad": 111.4071074,
+        "bundleQty": 7,
+        "bundlePriceUsd": 555.8,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 629,
+        "maxBulkPriceUsd": 49942.6
+      }
+    ]
+  },
+  {
+    "id": 64,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box(No Shrink)",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 76.86,
+        "jpy": 12100,
+        "eur": 66.63237761,
+        "cad": 107.84208,
+        "bundleQty": 7,
+        "bundlePriceUsd": 538.02,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 650,
+        "maxBulkPriceUsd": 49959
+      }
+    ]
+  },
+  {
+    "id": 65,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (in 4packs)",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 83.21,
+        "jpy": 13100,
+        "eur": 72.13918568,
+        "cad": 116.7546486,
+        "bundleQty": 7,
+        "bundlePriceUsd": 582.47,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 600,
+        "maxBulkPriceUsd": 49926
+      }
+    ]
+  },
+  {
+    "id": 67,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (in 4packs)",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 78.76,
+        "jpy": 12400,
+        "eur": 68.28442003,
+        "cad": 110.5158506,
+        "bundleQty": 7,
+        "bundlePriceUsd": 551.32,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 634,
+        "maxBulkPriceUsd": 49933.84
+      }
+    ]
+  },
+  {
+    "id": 68,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 94.01,
+        "jpy": 14800,
+        "eur": 81.50075939,
+        "cad": 131.9060152,
+        "bundleQty": 6,
+        "bundlePriceUsd": 564.06,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 531,
+        "maxBulkPriceUsd": 49919.31
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (No Shrink)",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 81.3,
+        "jpy": 12800,
+        "eur": 70.48714326,
+        "cad": 114.080878,
+        "bundleQty": 7,
+        "bundlePriceUsd": 569.1,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 615,
+        "maxBulkPriceUsd": 49999.5
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 88.29,
+        "jpy": 13900,
+        "eur": 76.54463213,
+        "cad": 123.8847034,
+        "bundleQty": 6,
+        "bundlePriceUsd": 529.74,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 566,
+        "maxBulkPriceUsd": 49972.14
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (No Shrink)",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": null,
+        "jpy": null,
+        "eur": null,
+        "cad": null
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 56.53,
+        "jpy": 8900,
+        "eur": 49.01059179,
+        "cad": 79.32186048,
+        "bundleQty": 9,
+        "bundlePriceUsd": 508.77,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 884,
+        "maxBulkPriceUsd": 49972.52
+      }
+    ]
+  },
+  {
+    "id": 75,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (No Shrink)",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 63.2,
+        "jpy": 9950,
+        "eur": 54.79274026,
+        "cad": 88.6800575,
+        "bundleQty": 8,
+        "bundlePriceUsd": 505.6,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 791,
+        "maxBulkPriceUsd": 49991.2
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 84.8,
+        "jpy": 13350,
+        "eur": 73.51588769,
+        "cad": 118.9827907,
+        "bundleQty": 6,
+        "bundlePriceUsd": 508.8,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 589,
+        "maxBulkPriceUsd": 49947.2
+      }
+    ]
+  },
+  {
+    "id": 77,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (No Shrink)",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 91.47,
+        "jpy": 14400,
+        "eur": 79.29803616,
+        "cad": 128.3409877,
+        "bundleQty": 6,
+        "bundlePriceUsd": 548.82,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 546,
+        "maxBulkPriceUsd": 49942.62
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 231.21,
+        "jpy": 36400,
+        "eur": 200.4478136,
+        "cad": 324.4174968,
+        "bundleQty": 3,
+        "bundlePriceUsd": 693.63,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 216,
+        "maxBulkPriceUsd": 49941.36
+      }
+    ]
+  },
+  {
+    "id": 79,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (No Shrink)",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 172.45,
+        "jpy": 27150,
+        "eur": 149.509839,
+        "cad": 241.9762373,
+        "bundleQty": 3,
+        "bundlePriceUsd": 517.35,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 289,
+        "maxBulkPriceUsd": 49838.05
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 151.81,
+        "jpy": 23900,
+        "eur": 131.6127128,
+        "cad": 213.0103894,
+        "bundleQty": 4,
+        "bundlePriceUsd": 607.24,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 329,
+        "maxBulkPriceUsd": 49945.49
+      }
+    ]
+  },
+  {
+    "id": 81,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (No Shrink)",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 132.75,
+        "jpy": 20900,
+        "eur": 115.0922886,
+        "cad": 186.2726836,
+        "bundleQty": 4,
+        "bundlePriceUsd": 531,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 376,
+        "maxBulkPriceUsd": 49914
+      }
+    ]
+  },
+  {
+    "id": 82,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 72.41,
+        "jpy": 11400,
+        "eur": 62.77761196,
+        "cad": 101.603282,
+        "bundleQty": 7,
+        "bundlePriceUsd": 506.87,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 690,
+        "maxBulkPriceUsd": 49962.9
+      }
+    ]
+  },
+  {
+    "id": 83,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (No Shrink)",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 66.06,
+        "jpy": 10400,
+        "eur": 57.27080389,
+        "cad": 92.69071337,
+        "bundleQty": 8,
+        "bundlePriceUsd": 528.48,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 756,
+        "maxBulkPriceUsd": 49941.36
+      }
+    ]
+  },
+  {
+    "id": 84,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 75.59,
+        "jpy": 11900,
+        "eur": 65.531016,
+        "cad": 106.0595663,
+        "bundleQty": 7,
+        "bundlePriceUsd": 529.13,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 661,
+        "maxBulkPriceUsd": 49964.99
+      }
+    ]
+  },
+  {
+    "id": 85,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (No Shrink)",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 72.41,
+        "jpy": 11400,
+        "eur": 62.77761196,
+        "cad": 101.603282,
+        "bundleQty": 7,
+        "bundlePriceUsd": 506.87,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 690,
+        "maxBulkPriceUsd": 49962.9
+      }
+    ]
+  },
+  {
+    "id": 86,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 135.93,
+        "jpy": 21400,
+        "eur": 117.8456926,
+        "cad": 190.7289679,
+        "bundleQty": 4,
+        "bundlePriceUsd": 543.72,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 367,
+        "maxBulkPriceUsd": 49886.31
+      }
+    ]
+  },
+  {
+    "id": 87,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (No Shrink)",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 120.05,
+        "jpy": 18900,
+        "eur": 104.0786725,
+        "cad": 168.4475464,
+        "bundleQty": 5,
+        "bundlePriceUsd": 600.25,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 416,
+        "maxBulkPriceUsd": 49940.8
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 56.53,
+        "jpy": 8900,
+        "eur": 49.01059179,
+        "cad": 79.32186048,
+        "bundleQty": 9,
+        "bundlePriceUsd": 508.77,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 884,
+        "maxBulkPriceUsd": 49972.52
+      }
+    ]
+  },
+  {
+    "id": 89,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 55.26,
+        "jpy": 8700,
+        "eur": 47.90923018,
+        "cad": 77.53934676,
+        "bundleQty": 10,
+        "bundlePriceUsd": 552.6,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 904,
+        "maxBulkPriceUsd": 49955.04
+      }
+    ]
+  },
+  {
+    "id": 90,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 53.36,
+        "jpy": 8400,
+        "eur": 46.25718776,
+        "cad": 74.86557618,
+        "bundleQty": 10,
+        "bundlePriceUsd": 533.6,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 937,
+        "maxBulkPriceUsd": 49998.32
+      }
+    ]
+  },
+  {
+    "id": 91,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 81.94,
+        "jpy": 12900,
+        "eur": 71.03782406,
+        "cad": 114.9721349,
+        "bundleQty": 7,
+        "bundlePriceUsd": 573.58,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 610,
+        "maxBulkPriceUsd": 49983.4
+      }
+    ]
+  },
+  {
+    "id": 92,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 60.98,
+        "jpy": 9600,
+        "eur": 52.86535744,
+        "cad": 85.5606585,
+        "bundleQty": 9,
+        "bundlePriceUsd": 548.82,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 819,
+        "maxBulkPriceUsd": 49942.62
+      }
+    ]
+  },
+  {
+    "id": 93,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 53.36,
+        "jpy": 8400,
+        "eur": 46.25718776,
+        "cad": 74.86557618,
+        "bundleQty": 10,
+        "bundlePriceUsd": 533.6,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 937,
+        "maxBulkPriceUsd": 49998.32
+      }
+    ]
+  },
+  {
+    "id": 94,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 60.34,
+        "jpy": 9500,
+        "eur": 52.31467663,
+        "cad": 84.66940164,
+        "bundleQty": 9,
+        "bundlePriceUsd": 543.06,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 828,
+        "maxBulkPriceUsd": 49961.52
+      }
+    ]
+  },
+  {
+    "id": 95,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 56.53,
+        "jpy": 8900,
+        "eur": 49.01059179,
+        "cad": 79.32186048,
+        "bundleQty": 9,
+        "bundlePriceUsd": 508.77,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 884,
+        "maxBulkPriceUsd": 49972.52
+      }
+    ]
+  },
+  {
+    "id": 96,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 69.23,
+        "jpy": 10900,
+        "eur": 60.02420793,
+        "cad": 97.14699767,
+        "bundleQty": 8,
+        "bundlePriceUsd": 553.84,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 722,
+        "maxBulkPriceUsd": 49984.06
+      }
+    ]
+  },
+  {
+    "id": 97,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 83.84,
+        "jpy": 13200,
+        "eur": 72.68986648,
+        "cad": 117.6459054,
+        "bundleQty": 6,
+        "bundlePriceUsd": 503.04,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 596,
+        "maxBulkPriceUsd": 49968.64
+      }
+    ]
+  },
+  {
+    "id": 98,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 78.76,
+        "jpy": 12400,
+        "eur": 68.28442003,
+        "cad": 110.5158506,
+        "bundleQty": 7,
+        "bundlePriceUsd": 551.32,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 634,
+        "maxBulkPriceUsd": 49933.84
+      }
+    ]
+  },
+  {
+    "id": 99,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 53.36,
+        "jpy": 8400,
+        "eur": 46.25718776,
+        "cad": 74.86557618,
+        "bundleQty": 10,
+        "bundlePriceUsd": 533.6,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 937,
+        "maxBulkPriceUsd": 49998.32
+      }
+    ]
+  },
+  {
+    "id": 100,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 70.51,
+        "jpy": 11100,
+        "eur": 61.12556954,
+        "cad": 98.92951139,
+        "bundleQty": 8,
+        "bundlePriceUsd": 564.08,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 709,
+        "maxBulkPriceUsd": 49991.59
+      }
+    ]
+  },
+  {
+    "id": 101,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 88.29,
+        "jpy": 13900,
+        "eur": 76.54463213,
+        "cad": 123.8847034,
+        "bundleQty": 6,
+        "bundlePriceUsd": 529.74,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 566,
+        "maxBulkPriceUsd": 49972.14
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 66.06,
+        "jpy": 10400,
+        "eur": 57.27080389,
+        "cad": 92.69071337,
+        "bundleQty": 8,
+        "bundlePriceUsd": 528.48,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 756,
+        "maxBulkPriceUsd": 49941.36
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 54.63,
+        "jpy": 8600,
+        "eur": 47.35854937,
+        "cad": 76.6480899,
+        "bundleQty": 10,
+        "bundlePriceUsd": 546.3,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 915,
+        "maxBulkPriceUsd": 49986.45
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 105.44,
+        "jpy": 16600,
+        "eur": 91.41301391,
+        "cad": 147.9486386,
+        "bundleQty": 5,
+        "bundlePriceUsd": 527.2,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 474,
+        "maxBulkPriceUsd": 49978.56
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 59.71,
+        "jpy": 9400,
+        "eur": 51.76399583,
+        "cad": 83.77814478,
+        "bundleQty": 9,
+        "bundlePriceUsd": 537.39,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 837,
+        "maxBulkPriceUsd": 49977.27
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 234.38,
+        "jpy": 36900,
+        "eur": 203.2012177,
+        "cad": 328.8737811,
+        "bundleQty": 3,
+        "bundlePriceUsd": 703.14,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 213,
+        "maxBulkPriceUsd": 49922.94
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 100.99,
+        "jpy": 15900,
+        "eur": 87.55824826,
+        "cad": 141.7098406,
+        "bundleQty": 5,
+        "bundlePriceUsd": 504.95,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 495,
+        "maxBulkPriceUsd": 49990.05
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 145.46,
+        "jpy": 22900,
+        "eur": 126.1059047,
+        "cad": 204.0978208,
+        "bundleQty": 4,
+        "bundlePriceUsd": 581.84,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 343,
+        "maxBulkPriceUsd": 49892.78
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box (No Shrink)",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": null,
+        "jpy": null,
+        "eur": null,
+        "cad": null
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": null,
+        "jpy": null,
+        "eur": null,
+        "cad": null
+      }
+    ]
+  },
+  {
+    "id": 111,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 551.97,
+        "jpy": 86900,
+        "eur": 478.541621,
+        "cad": 774.5022108,
+        "bundleQty": 1,
+        "bundlePriceUsd": 551.97,
+        "clearsFloorAsSingle": true,
+        "maxBulkQty": 90,
+        "maxBulkPriceUsd": 49677.3
+      }
+    ]
+  },
+  {
+    "id": 112,
+    "variants": [
+      {
+        "kind": "box",
+        "typeLabel": "Box",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": null,
+        "jpy": null,
+        "eur": null,
+        "cad": null
+      }
+    ]
+  },
+  {
+    "id": 115,
+    "variants": [
+      {
+        "kind": "single",
+        "typeLabel": "One single",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 0.19,
+        "jpy": 30,
+        "eur": 0.165204242,
+        "cad": 0.2673770578,
+        "bundleQty": 2632,
+        "bundlePriceUsd": 500.08,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 263157,
+        "maxBulkPriceUsd": 49999.83
+      }
+    ]
+  },
+  {
+    "id": 117,
+    "variants": [
+      {
+        "kind": "single",
+        "typeLabel": "One single",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 0.51,
+        "jpy": 80,
+        "eur": 0.4405446453,
+        "cad": 0.7130054875,
+        "bundleQty": 981,
+        "bundlePriceUsd": 500.31,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 98039,
+        "maxBulkPriceUsd": 49999.89
+      }
+    ]
+  },
+  {
+    "id": 118,
+    "variants": [
+      {
+        "kind": "single",
+        "typeLabel": "One single",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 1.27,
+        "jpy": 200,
+        "eur": 1.101361613,
+        "cad": 1.782513719,
+        "bundleQty": 394,
+        "bundlePriceUsd": 500.38,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 39370,
+        "maxBulkPriceUsd": 49999.9
+      }
+    ]
+  },
+  {
+    "id": 119,
+    "variants": [
+      {
+        "kind": "single",
+        "typeLabel": "One single",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 4.13,
+        "jpy": 650,
+        "eur": 3.579425243,
+        "cad": 5.793169586,
+        "bundleQty": 122,
+        "bundlePriceUsd": 503.86,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 12106,
+        "maxBulkPriceUsd": 49997.78
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "variants": [
+      {
+        "kind": "single",
+        "typeLabel": "One single",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 0.57,
+        "jpy": 90,
+        "eur": 0.495612726,
+        "cad": 0.8021311734,
+        "bundleQty": 878,
+        "bundlePriceUsd": 500.46,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 87719,
+        "maxBulkPriceUsd": 49999.83
+      }
+    ]
+  },
+  {
+    "id": 121,
+    "variants": [
+      {
+        "kind": "single",
+        "typeLabel": "One single",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 1.21,
+        "jpy": 190,
+        "eur": 1.046293533,
+        "cad": 1.693388033,
+        "bundleQty": 414,
+        "bundlePriceUsd": 500.94,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 41322,
+        "maxBulkPriceUsd": 49999.62
+      }
+    ]
+  },
+  {
+    "id": 122,
+    "variants": [
+      {
+        "kind": "single",
+        "typeLabel": "One single",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 1.71,
+        "jpy": 270,
+        "eur": 1.486838178,
+        "cad": 2.40639352,
+        "bundleQty": 293,
+        "bundlePriceUsd": 501.03,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 29239,
+        "maxBulkPriceUsd": 49998.69
+      }
+    ]
+  },
+  {
+    "id": 123,
+    "variants": [
+      {
+        "kind": "single",
+        "typeLabel": "One single",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 3.81,
+        "jpy": 600,
+        "eur": 3.30408484,
+        "cad": 5.347541156,
+        "bundleQty": 132,
+        "bundlePriceUsd": 502.92,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 13123,
+        "maxBulkPriceUsd": 49998.63
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "variants": [
+      {
+        "kind": "single",
+        "typeLabel": "One single",
+        "caseSize": null,
+        "inStock": false,
+        "priceUsd": 0.25,
+        "jpy": 40,
+        "eur": 0.2202723227,
+        "cad": 0.3565027437,
+        "bundleQty": 2000,
+        "bundlePriceUsd": 500,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 200000,
+        "maxBulkPriceUsd": 50000
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "variants": [
+      {
+        "kind": "single",
+        "typeLabel": "One single",
+        "caseSize": null,
+        "inStock": true,
+        "priceUsd": 6.35,
+        "jpy": 1000,
+        "eur": 5.506808067,
+        "cad": 8.912568593,
+        "bundleQty": 79,
+        "bundlePriceUsd": 501.65,
+        "clearsFloorAsSingle": false,
+        "maxBulkQty": 7874,
+        "maxBulkPriceUsd": 49999.9
+      }
+    ]
+  }
+]

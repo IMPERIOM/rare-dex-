@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node \"C:\\\\Users\\\\lemur\\\\AppData\\\\Local\\\\Temp\\\\rdx_xlsx\\\\transform.js\")",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}

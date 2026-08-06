@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+/* ============================================================
+   RareDexCards — Dark Premium B2B Wholesale Design System
+   ============================================================ */
+@theme {
+  /* Base / surfaces (dark) */
+  --color-base: #08080c;
+  --color-base-2: #0c0c14;
+  --color-surface: #12121c;
+  --color-surface-2: #171724;
+  --color-elevated: #1c1c2b;
+  --color-line: #ffffff14;
+  --color-line-strong: #ffffff26;
+
+  /* Text */
+  --color-ink: #f5f6fa;
+  --color-muted: #a1a1b5;
+  --color-faint: #6b6b80;
+
+  /* Accents */
+  --color-royal: #3b82f6;
+  --color-royal-dark: #2563eb;
+  --color-royal-deep: #1e3a8a;
+  --color-violet: #7c3aed;
+  --color-violet-light: #a855f7;
+  --color-gold: #fbbf24;
+  --color-gold-dark: #f59e0b;
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Radii */
+  --radius-card: 1rem;
+  --radius-lg: 1.25rem;
+
+  /* Shadows / glow */
+  --shadow-soft: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 30px rgb(0 0 0 / 0.35);
+  --shadow-lift: 0 20px 50px -12px rgb(0 0 0 / 0.6);
+  --glow-royal: 0 0 0 1px #3b82f633, 0 10px 40px -8px #3b82f655;
+  --glow-gold: 0 0 0 1px #fbbf2433, 0 10px 40px -8px #fbbf2455;
+}
+
+:root {
+  --background: #08080c;
+  --foreground: #f5f6fa;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(60% 50% at 15% -5%, #1e3a8a30 0%, transparent 60%),
+    radial-gradient(50% 45% at 95% 0%, #7c3aed26 0%, transparent 55%),
+    var(--background);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- Utilities ---- */
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--color-line);
+}
+.glass-strong {
+  background: rgba(18, 18, 28, 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--color-line);
+}
+
+/* Premium card with gradient hairline + hover lift */
+.card-premium {
+  position: relative;
+  background: linear-gradient(180deg, #16161f 0%, #101018 100%);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.card-premium:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-line-strong);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(100deg, #fff 0%, #bcd0ff 40%, #3b82f6 75%, #a855f7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gold-gradient {
+  background: linear-gradient(100deg, #fef3c7 0%, #fbbf24 50%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Animated gradient border ring (for CTAs / featured) */
+.ring-gradient {
+  background:
+    linear-gradient(var(--color-surface), var(--color-surface)) padding-box,
+    linear-gradient(120deg, #3b82f6, #7c3aed, #fbbf24) border-box;
+  border: 1px solid transparent;
+}
+
+/* Grid glow backdrop */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, #ffffff08 1px, transparent 1px),
+    linear-gradient(to bottom, #ffffff08 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* Marquee for rotating banner fallback */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Holo / foil shimmer sweep (on hover) — card-culture motif */
+.holo { position: relative; overflow: hidden; }
+.holo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 28%,
+    rgba(255, 255, 255, 0.35) 46%,
+    rgba(168, 216, 255, 0.28) 52%,
+    rgba(216, 168, 255, 0.28) 58%,
+    transparent 74%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.holo:hover::after { transform: translateX(130%); }
+
+/* Animated foil gradient text */
+@keyframes foil-pan {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.foil-text {
+  background: linear-gradient(100deg, #a855f7, #3b82f6, #22d3ee, #fbbf24, #ec4899, #a855f7);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: foil-pan 7s linear infinite;
+}
+
+/* Subtle card-back pattern */
+.card-back-pattern {
+  background-image:
+    radial-gradient(circle at 22% 24%, #7c3aed33 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 64%, #3b82f633 0 2px, transparent 3px),
+    linear-gradient(135deg, transparent, #1a1030);
+  background-size: 28px 28px, 28px 28px, 100% 100%;
+}
+
+/* Focus visibility (WCAG 2.4.7) */
+:focus-visible {
+  outline: 2px solid var(--color-royal);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+}

@@ -1,0 +1,9 @@
+Handle,Title,Body (HTML),Vendor,Type,Tags,Published,Option1 Name,Option1 Value,Option2 Name,Option2 Value,Variant SKU,Variant Inventory Qty,Variant Price,Variant Compare At Price,Image Src,Image Position,Image Alt Text,Status
+chaos-rising-booster-box,Chaos Rising Booster Box,<p>Factory-sealed 36-pack <strong>booster box</strong>. 100% authentic.</p>,RareDex,Booster Boxes,"sealed, english, new",TRUE,Title,Default Title,,,RDX-CR-BB,12,209.99,249.99,https://cdn.shopify.com/s/files/1/0000/0001/box.jpg?width=1200,1,Chaos Rising Booster Box,active
+chaos-rising-booster-box,,,,,,,,,,,,,,,https://cdn.shopify.com/s/files/1/0000/0001/box-back.jpg?v=17250001,2,,
+chaos-rising-3pack,Chaos Rising 3-Pack Blister,<p>Three-pack blister with promo card.</p>,RareDex,Booster Packs,"sealed, english",TRUE,Style,Charmander,,,RDX-CR-3P-CHAR,40,29.99,39.99,https://cdn.shopify.com/s/files/1/0000/0001/blister-charmander.jpg?width=800&height=800,1,Charmander blister,active
+chaos-rising-3pack,,,,,,,Style,Squirtle,,,RDX-CR-3P-SQUIR,0,29.99,39.99,https://cdn.shopify.com/s/files/1/0000/0001/blister-squirtle.png,2,Squirtle blister,
+chaos-rising-3pack,,,,,,,,,,,,,,,https://cdn.shopify.com/s/files/1/0000/0001/blister-bulbasaur.png,3,Bulbasaur blister,
+chaos-rising-etb,Chaos Rising Elite Trainer Box,"<p>ETB containing 9 booster packs, dice &amp; sleeves.</p>",RareDex,Elite Trainer Boxes,"sealed, english, bestseller",TRUE,Title,Default Title,,,RDX-CR-ETB,0,59.99,,https://cdn.shopify.com/s/files/1/0000/0001/etb.png?width=1500&v=99,1,Chaos Rising ETB,active
+graded-charizard-psa10,Charizard PSA 10 Gem Mint,<p>Slabbed &amp; certified.</p>,Graded,Graded Cards,"graded, psa, single",TRUE,Title,Default Title,,,,3,2499.00,,https://cdn.shopify.com/s/files/1/0000/0001/charizard-psa10.jpg,1,PSA 10 Charizard,active
+hidden-draft,Unreleased Draft Product,,RareDex,Booster Boxes,,FALSE,Title,Default Title,,,RDX-DRAFT,5,99.99,,,,,draft
