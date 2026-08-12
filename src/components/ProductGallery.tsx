@@ -4,15 +4,14 @@ import { useState } from "react";
 import type { Product } from "@/lib/types";
 import { CardArt } from "./CardArt";
 
-/**
- * Zoomable gallery. With real photography this maps to Next/Image with multiple
- * angles; for now it shows the product image with a hover-zoom affordance and a
- * set of thumbnail "views".
- */
+/** Zoomable gallery. Cycles through the product's real photos when available
+ * (product.images), falling back to a single view for products that only
+ * have one photo (or none, via CardArt's gradient fallback). */
 export function ProductGallery({ product }: { product: Product }) {
   const [zoom, setZoom] = useState(false);
-  const views = ["Front", "Back", "Angle", "Detail"];
+  const photos = product.images?.length ? product.images : product.image ? [product.image] : [];
   const [active, setActive] = useState(0);
+  const activeSrc = photos[active];
 
   return (
     <div>
@@ -24,6 +23,7 @@ export function ProductGallery({ product }: { product: Product }) {
       >
         <CardArt
           product={product}
+          imageSrc={activeSrc}
           showLabel={false}
           className={`aspect-square w-full transition-transform duration-300 ${
             zoom ? "scale-150" : "scale-100"
@@ -34,27 +34,29 @@ export function ProductGallery({ product }: { product: Product }) {
         </span>
       </div>
 
-      <div className="mt-3 grid grid-cols-4 gap-3">
-        {views.map((v, i) => (
-          <button
-            key={v}
-            onClick={() => setActive(i)}
-            className={`flex flex-col items-center gap-1 rounded-xl border p-1.5 transition ${
-              active === i
-                ? "border-royal ring-1 ring-royal"
-                : "border-line hover:border-line-strong"
-            }`}
-            aria-label={`View ${v}`}
-          >
-            <CardArt
-              product={product}
-              showLabel={false}
-              className="aspect-square w-full rounded-md"
-            />
-            <span className="text-[10px] font-medium text-faint">{v}</span>
-          </button>
-        ))}
-      </div>
+      {photos.length > 1 && (
+        <div className="mt-3 grid grid-cols-4 gap-3">
+          {photos.map((src, i) => (
+            <button
+              key={src}
+              onClick={() => setActive(i)}
+              className={`overflow-hidden rounded-xl border p-1.5 transition ${
+                active === i
+                  ? "border-royal ring-1 ring-royal"
+                  : "border-line hover:border-line-strong"
+              }`}
+              aria-label={`View ${i + 1}`}
+            >
+              <CardArt
+                product={product}
+                imageSrc={src}
+                showLabel={false}
+                className="aspect-square w-full rounded-md"
+              />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

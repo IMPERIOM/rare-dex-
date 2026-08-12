@@ -106,6 +106,10 @@ export interface Product {
   stock: number;
   art: { from: string; to: string; emoji: string };
   image?: string;
+  images?: string[];
+  /** Per-unit USD price. Falls back to the legacy PRICES map in products.ts
+   * when absent (kept for the handful of hand-authored products). */
+  price?: number;
   authentic: boolean;
   grading?: GradingInfo;
   isNew?: boolean;
