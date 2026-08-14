@@ -1,21 +1,21 @@
 import { NextResponse } from "next/server";
-import { isAdminAuthenticated } from "@/lib/auth";
+import { isAdminAuthenticatedFromRequest } from "@/lib/auth";
 import { dbQuery } from "@/lib/db";
 import { sendEmail, getOrderStatusUpdateHtml } from "@/lib/mail";
 
 export async function GET(
-  _request: Request,
+  request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const authed = await isAdminAuthenticated();
-  if (!authed) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!isAdminAuthenticatedFromRequest(request))
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { id } = await params;
   try {
     const result = await dbQuery("SELECT * FROM orders WHERE id = $1", [id]);
     if (result.rows.length === 0) return NextResponse.json({ error: "Order not found" }, { status: 404 });
     return NextResponse.json({ order: result.rows[0] });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: err.message || String(err) }, { status: 500 });
   }
 }
 
@@ -23,8 +23,8 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const authed = await isAdminAuthenticated();
-  if (!authed) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!isAdminAuthenticatedFromRequest(request))
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { id } = await params;
   const body = await request.json();
 
@@ -68,6 +68,6 @@ export async function PATCH(
     }
     return NextResponse.json({ order });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: err.message || String(err) }, { status: 500 });
   }
 }

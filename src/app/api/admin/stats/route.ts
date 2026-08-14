@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { isAdminAuthenticated } from "@/lib/auth";
+import { isAdminAuthenticatedFromRequest } from "@/lib/auth";
 import { dbQuery } from "@/lib/db";
 
-export async function GET() {
-  const authed = await isAdminAuthenticated();
-  if (!authed) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+export async function GET(request: Request) {
+  if (!isAdminAuthenticatedFromRequest(request))
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   try {
     const [pending, paid, canceled, orders7d, revenue7d, recentOrders, topProducts] =
@@ -28,26 +28,15 @@ export async function GET() {
       ]);
 
     return NextResponse.json({
-      pending: {
-        count: parseInt(pending.rows[0].count, 10),
-        value: parseFloat(pending.rows[0].value),
-      },
-      paid: {
-        count: parseInt(paid.rows[0].count, 10),
-        value: parseFloat(paid.rows[0].value),
-      },
-      canceled: {
-        count: parseInt(canceled.rows[0].count, 10),
-      },
-      last7Days: {
-        count: parseInt(orders7d.rows[0].count, 10),
-        revenue: parseFloat(revenue7d.rows[0].value),
-      },
+      pending:   { count: parseInt(pending.rows[0].count, 10),  value: parseFloat(pending.rows[0].value) },
+      paid:      { count: parseInt(paid.rows[0].count, 10),     value: parseFloat(paid.rows[0].value) },
+      canceled:  { count: parseInt(canceled.rows[0].count, 10) },
+      last7Days: { count: parseInt(orders7d.rows[0].count, 10), revenue: parseFloat(revenue7d.rows[0].value) },
       recentOrders: recentOrders.rows,
       topProducts: topProducts.rows,
     });
   } catch (err: any) {
-    console.error("GET admin stats error:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    console.error("GET admin stats error:", err);
+    return NextResponse.json({ error: err.message || String(err) }, { status: 500 });
   }
 }

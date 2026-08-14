@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { isAdminAuthenticated } from "@/lib/auth";
+import { isAdminAuthenticatedFromRequest } from "@/lib/auth";
 import { dbQuery } from "@/lib/db";
 import { sendEmail, getPaymentRequestHtml } from "@/lib/mail";
 
@@ -7,8 +7,8 @@ export async function POST(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const authed = await isAdminAuthenticated();
-  if (!authed) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!isAdminAuthenticatedFromRequest(request))
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { id } = await params;
   const { instructions } = await request.json();
 
@@ -17,7 +17,6 @@ export async function POST(
     if (orderResult.rows.length === 0) return NextResponse.json({ error: "Order not found" }, { status: 404 });
     const order = orderResult.rows[0];
 
-    // Save payment details and timestamp
     await dbQuery(
       "UPDATE orders SET payment_details = $1, payment_email_sent_at = NOW() WHERE id = $2",
       [instructions, id]
@@ -39,7 +38,7 @@ export async function POST(
           total_eur: Number(order.total_eur),
           subtotal_eur: Number(order.subtotal_eur),
           shipping_eur: Number(order.shipping_eur),
-          lines: lines,
+          lines,
         },
         instructions
       ),
@@ -47,6 +46,6 @@ export async function POST(
 
     return NextResponse.json({ success: true, sentAt: new Date().toISOString() });
   } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: err.message || String(err) }, { status: 500 });
   }
 }

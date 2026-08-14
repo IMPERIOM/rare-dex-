@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server";
-import { isAdminAuthenticated } from "@/lib/auth";
+import { isAdminAuthenticatedFromRequest } from "@/lib/auth";
 import { dbQuery } from "@/lib/db";
 
-// GET /api/admin/orders
 export async function GET(request: Request) {
-  const authed = await isAdminAuthenticated();
-  if (!authed) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (!isAdminAuthenticatedFromRequest(request))
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
   const { searchParams } = new URL(request.url);
   const status = searchParams.get("status");
@@ -32,7 +31,7 @@ export async function GET(request: Request) {
     const result = await dbQuery(queryText, params);
     return NextResponse.json({ orders: result.rows });
   } catch (err: any) {
-    console.error("GET admin orders error:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    console.error("GET admin orders error:", err);
+    return NextResponse.json({ error: err.message || String(err) }, { status: 500 });
   }
 }
