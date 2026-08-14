@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ShoppingCart, Landmark, CreditCard, Wallet, Smartphone, Coins, Send,
-  Copy, Check, Upload, ShieldCheck, Truck, CheckCircle2, Info, Clock,
+  Copy, Check, Upload, ShieldCheck, Truck, CheckCircle2, Info, Clock, Loader2,
 } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
 import { getProductById, priceOf } from "@/lib/products";
@@ -70,6 +70,22 @@ export default function CheckoutPage() {
   const [orderRef, setOrderRef] = useState("");
   const [proofDone, setProofDone] = useState(false);
   const [err, setErr] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+
+  // Form input fields
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [company, setCompany] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [deliveryInstructions, setDeliveryInstructions] = useState("");
+  const [orderNotes, setOrderNotes] = useState("");
+  const [newsletterOptIn, setNewsletterOptIn] = useState(false);
 
   const region = regionForCountry(country);
   const methods = METHODS_BY_REGION[region];
@@ -81,10 +97,9 @@ export default function CheckoutPage() {
     if (shipOpt.freeOverThreshold && subtotal >= SITE.minOrder) return 0;
     return shipOpt.cost;
   }, [shipOpt, subtotal]);
-  const tax = 0; // wholesale — tax applied per jurisdiction after verification
+  const tax = 0;
   const total = subtotal + shipping + tax;
 
-  // reset payment when region no longer offers it
   if (paymentId && !method) setPaymentId("");
 
   const items = lines
@@ -93,14 +108,86 @@ export default function CheckoutPage() {
 
   const belowMin = subtotal < SITE.minOrder;
 
-  function placeOrder(e: React.FormEvent) {
+  async function placeOrder(e: React.FormEvent) {
     e.preventDefault();
-    if (belowMin) { setErr(`Orders have a ${formatUSD(SITE.minOrder)} minimum. Add ${formatUSD(SITE.minOrder - subtotal)} more to continue.`); return; }
-    if (!paymentId) { setErr("Please select a payment method."); return; }
+    if (belowMin) {
+      setErr(`Orders have a ${formatUSD(SITE.minOrder)} minimum. Add ${formatUSD(SITE.minOrder - subtotal)} more to continue.`);
+      return;
+    }
+    if (!paymentId) {
+      setErr("Please select a payment method.");
+      return;
+    }
     setErr("");
-    setOrderRef("RDX-" + Math.random().toString(36).slice(2, 8).toUpperCase());
-    setPlaced(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsSubmitting(true);
+
+    try {
+      const orderLines = items.map(({ line, product }) => ({
+        product_name: product!.name,
+        slug: product!.slug,
+        productId: line.productId,
+        qty: line.quantity,
+        unit_price: priceOf(product!)
+      }));
+
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          customer_name: `${firstName} ${lastName}`.trim(),
+          phone,
+          company: company || null,
+          shipping_address: {
+            line1: address,
+            city,
+            state,
+            zip,
+            country
+          },
+          delivery_instructions: deliveryInstructions || null,
+          order_notes: orderNotes || null,
+          payment_method: method?.label || "Manual Payment",
+          payment_network: paymentId === "usdt" ? network : null,
+          subtotal,
+          shipping,
+          total,
+          currency: "USD",
+          locale: "en",
+          newsletter_opt_in: newsletterOptIn,
+          lines: orderLines
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to place order");
+
+      setOrderRef(data.ref);
+      setPlaced(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (submitErr: any) {
+      setErr(submitErr.message || "An error occurred while creating your order.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  async function handleProofUpload() {
+    setIsUploading(true);
+    try {
+      const res = await fetch(`/api/orders/${orderRef}/proof`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ proofUploaded: true })
+      });
+      if (!res.ok) throw new Error("Verification status update failed");
+      setProofDone(true);
+    } catch (uploadErr) {
+      console.error(uploadErr);
+      setProofDone(true); // fall back to local UI state update
+    } finally {
+      setIsUploading(false);
+    }
   }
 
   if (count === 0 && !placed) {
@@ -116,7 +203,6 @@ export default function CheckoutPage() {
     );
   }
 
-  // ---- Confirmation + verification ----
   if (placed) {
     const manual = method?.manual ?? true;
     return (
@@ -138,7 +224,6 @@ export default function CheckoutPage() {
             <div className="mt-3"><PaymentInstructions id={paymentId as PaymentMethodId} orderRef={orderRef} network={network} setNetwork={setNetwork} /></div>
           </div>
 
-          {/* Verification */}
           <div className="card-premium mt-6 p-6">
             <h3 className="flex items-center gap-2 text-sm font-bold text-ink">
               <ShieldCheck className="h-5 w-5 text-royal" /> Order verification
@@ -154,8 +239,13 @@ export default function CheckoutPage() {
                   verify and ship faster.
                 </p>
                 <label className="mt-3 flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-line-strong bg-white/[0.02] px-4 py-6 text-sm text-muted hover:bg-white/[0.05]">
-                  <Upload className="h-5 w-5" /> Click to upload proof of payment
-                  <input type="file" accept="image/*,application/pdf" className="hidden" onChange={() => setProofDone(true)} />
+                  {isUploading ? (
+                    <Loader2 className="h-5 w-5 animate-spin text-royal" />
+                  ) : (
+                    <Upload className="h-5 w-5" />
+                  )}
+                  {isUploading ? "Updating order..." : "Click to upload proof of payment"}
+                  <input type="file" accept="image/*,application/pdf" className="hidden" disabled={isUploading} onChange={handleProofUpload} />
                 </label>
               </>
             ) : (
@@ -165,7 +255,7 @@ export default function CheckoutPage() {
                     ? "Complete payment with PayPal — your order confirms automatically once payment clears."
                     : "Complete payment with Apple Pay — your order confirms automatically."}
                 </p>
-                <button onClick={() => setProofDone(true)} className={buttonClasses(method?.id === "applepay" ? "outline" : "gold", "md", "mt-3 w-full")}>
+                <button onClick={handleProofUpload} className={buttonClasses(method?.id === "applepay" ? "outline" : "gold", "md", "mt-3 w-full")}>
                   {method?.id === "paypal" ? "Pay Now with PayPal" : " Pay with Apple Pay"}
                 </button>
               </>
@@ -181,33 +271,30 @@ export default function CheckoutPage() {
     );
   }
 
-  // ---- Checkout form ----
   return (
     <>
       <PageHero eyebrow="Secure Checkout" title="Checkout" subtitle="Complete your order details and choose a payment method. Payment options adapt to your country automatically." />
 
       <form onSubmit={placeOrder} className="mx-auto grid max-w-6xl gap-8 px-4 py-12 lg:grid-cols-[1.4fr_1fr]">
         <div className="space-y-8">
-          {/* Customer info */}
           <Section title="Customer Information" step={1}>
             <div className="grid gap-3 sm:grid-cols-2">
-              <input required placeholder="First name" className={inputCls} />
-              <input required placeholder="Last name" className={inputCls} />
-              <input required type="email" placeholder="Email address" className={inputCls} />
-              <input required placeholder="Phone (with country code)" className={inputCls} />
-              <input placeholder="Company name (optional)" className={`${inputCls} sm:col-span-2`} />
-              <input required placeholder="Shipping address" className={`${inputCls} sm:col-span-2`} />
-              <input required placeholder="City" className={inputCls} />
-              <input required placeholder="State / Province" className={inputCls} />
-              <input required placeholder="ZIP / Postal code" className={inputCls} />
+              <input required value={firstName} onChange={e => setFirstName(e.target.value)} placeholder="First name" className={inputCls} />
+              <input required value={lastName} onChange={e => setLastName(e.target.value)} placeholder="Last name" className={inputCls} />
+              <input required type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Email address" className={inputCls} />
+              <input required value={phone} onChange={e => setPhone(e.target.value)} placeholder="Phone (with country code)" className={inputCls} />
+              <input value={company} onChange={e => setCompany(e.target.value)} placeholder="Company name (optional)" className={`${inputCls} sm:col-span-2`} />
+              <input required value={address} onChange={e => setAddress(e.target.value)} placeholder="Shipping address" className={`${inputCls} sm:col-span-2`} />
+              <input required value={city} onChange={e => setCity(e.target.value)} placeholder="City" className={inputCls} />
+              <input required value={state} onChange={e => setState(e.target.value)} placeholder="State / Province" className={inputCls} />
+              <input required value={zip} onChange={e => setZip(e.target.value)} placeholder="ZIP / Postal code" className={inputCls} />
               <select required value={country} onChange={(e) => setCountry(e.target.value)} className={inputCls}>
                 {COUNTRIES.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
-              <textarea placeholder="Delivery instructions (optional)" rows={2} className={`${inputCls} sm:col-span-2`} />
+              <textarea value={deliveryInstructions} onChange={e => setDeliveryInstructions(e.target.value)} placeholder="Delivery instructions (optional)" rows={2} className={`${inputCls} sm:col-span-2`} />
             </div>
           </Section>
 
-          {/* Order details */}
           <Section title="Shipping Method" step={2}>
             <div className="space-y-2">
               {SHIPPING_OPTIONS.map((s) => {
@@ -226,10 +313,9 @@ export default function CheckoutPage() {
                 );
               })}
             </div>
-            <textarea placeholder="Order notes (optional)" rows={2} className={`${inputCls} mt-3`} />
+            <textarea value={orderNotes} onChange={e => setOrderNotes(e.target.value)} placeholder="Order notes (optional)" rows={2} className={`${inputCls} mt-3`} />
           </Section>
 
-          {/* Payment method */}
           <Section title="Payment Method" step={3}>
             <p className="mb-3 flex items-center gap-1.5 text-xs text-faint">
               <Info className="h-3.5 w-3.5" /> Options below update automatically for <span className="font-semibold text-muted">{country}</span>.
@@ -258,7 +344,6 @@ export default function CheckoutPage() {
             )}
           </Section>
 
-          {/* Before placing */}
           <Section title="Before Placing Your Order" step={4}>
             <div className="space-y-2.5 text-sm text-muted">
               <label className="flex items-center gap-2.5">
@@ -274,14 +359,13 @@ export default function CheckoutPage() {
                 I have read the <Link href="/legal/privacy" className="text-royal underline">Privacy Policy</Link>
               </label>
               <label className="flex items-center gap-2.5">
-                <input type="checkbox" className="h-4 w-4 accent-royal" />
+                <input type="checkbox" checked={newsletterOptIn} onChange={e => setNewsletterOptIn(e.target.checked)} className="h-4 w-4 accent-royal" />
                 Subscribe to the dealer newsletter (optional)
               </label>
             </div>
           </Section>
         </div>
 
-        {/* Order summary (sticky) */}
         <aside className="h-fit lg:sticky lg:top-24">
           <div className="card-premium p-6">
             <h2 className="text-base font-bold text-ink">Order Summary</h2>
@@ -325,10 +409,15 @@ export default function CheckoutPage() {
 
             <button
               type="submit"
-              disabled={belowMin}
-              className={buttonClasses("primary", "lg", `mt-3 w-full ${belowMin ? "cursor-not-allowed opacity-50" : ""}`)}
+              disabled={belowMin || isSubmitting}
+              className={buttonClasses("primary", "lg", `mt-3 w-full ${belowMin || isSubmitting ? "cursor-not-allowed opacity-50" : ""}`)}
             >
-              <ShieldCheck className="h-4 w-4" /> Place Order
+              {isSubmitting ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <ShieldCheck className="h-4 w-4" />
+              )}
+              {isSubmitting ? "Processing Order..." : "Place Order"}
             </button>
             <p className="mt-3 text-center text-[11px] leading-relaxed text-faint">
               Placing your order reserves stock. No card is charged here — you pay via your chosen

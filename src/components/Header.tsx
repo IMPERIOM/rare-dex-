@@ -14,8 +14,8 @@ import {
 import { useCart } from "@/lib/cart-context";
 import { SITE } from "@/lib/format";
 import { Logo } from "./Logo";
-import { CartDrawer } from "./CartDrawer";
 import { cn } from "@/lib/cn";
+
 
 type Badge = { text: string; cls: string };
 type NavItem = {
@@ -303,7 +303,7 @@ export function Header() {
         )}
       </AnimatePresence>
 
-      <CartDrawer />
     </header>
   );
 }
+

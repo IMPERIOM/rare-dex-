@@ -6,6 +6,7 @@ import { TopBanner } from "@/components/TopBanner";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
+import { CartDrawer } from "@/components/CartDrawer";
 import { SITE } from "@/lib/format";
 
 const inter = Inter({
@@ -60,6 +61,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <WhatsAppButton />
+          <CartDrawer />
         </CartProvider>
       </body>
     </html>

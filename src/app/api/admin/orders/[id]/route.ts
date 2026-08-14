@@ -1,0 +1,71 @@
+import { NextResponse } from "next/server";
+import { isAdminAuthenticated } from "@/lib/auth";
+import { dbQuery } from "@/lib/db";
+import { sendEmail, getOrderStatusUpdateHtml } from "@/lib/mail";
+
+export async function GET(
+  _request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const authed = await isAdminAuthenticated();
+  if (!authed) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const { id } = await params;
+  try {
+    const result = await dbQuery("SELECT * FROM orders WHERE id = $1", [id]);
+    if (result.rows.length === 0) return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    return NextResponse.json({ order: result.rows[0] });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+}
+
+export async function PATCH(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const authed = await isAdminAuthenticated();
+  if (!authed) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const { id } = await params;
+  const body = await request.json();
+
+  const allowed = ["status", "payment_instructions", "proof_uploaded", "proof_url", "order_notes", "payment_details"];
+  const fields: string[] = [];
+  const values: any[] = [];
+
+  for (const key of allowed) {
+    if (body[key] !== undefined) {
+      values.push(body[key]);
+      fields.push(`${key} = $${values.length}`);
+    }
+  }
+
+  if (fields.length === 0) return NextResponse.json({ error: "Nothing to update" }, { status: 400 });
+
+  values.push(id);
+  try {
+    const result = await dbQuery(
+      `UPDATE orders SET ${fields.join(", ")} WHERE id = $${values.length} RETURNING *`,
+      values
+    );
+    if (result.rows.length === 0) return NextResponse.json({ error: "Order not found" }, { status: 404 });
+    const order = result.rows[0];
+
+    if (body.status) {
+      try {
+        await sendEmail({
+          to: order.email,
+          subject: `RareDexCards — Your Order ${order.ref} is now ${order.status}`,
+          html: getOrderStatusUpdateHtml({
+            ...order,
+            customer_first_name: (order.customer_name || "Customer").split(" ")[0],
+          }),
+        });
+      } catch (mailErr) {
+        console.error("Status email failed:", mailErr);
+      }
+    }
+    return NextResponse.json({ order });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+}
