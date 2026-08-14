@@ -164,6 +164,7 @@ export default function CheckoutPage() {
 
       setOrderRef(data.ref);
       setPlaced(true);
+      clear();
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (submitErr: any) {
       setErr(submitErr.message || "An error occurred while creating your order.");
@@ -214,52 +215,8 @@ export default function CheckoutPage() {
             <h2 className="mt-3 text-xl font-bold text-ink">Thanks — your order is reserved</h2>
             <p className="mt-2 text-sm text-muted">
               Order total <span className="font-bold text-ink">{formatUSD(total)}</span> via{" "}
-              <span className="font-semibold text-ink">{method?.label}</span>. Complete payment
-              using the details below to start processing.
+              <span className="font-semibold text-ink">{method?.label}</span>. We have sent your order confirmation and payment details to your email address.
             </p>
-          </div>
-
-          <div className="mt-6">
-            <h3 className="text-sm font-bold text-ink">Payment instructions</h3>
-            <div className="mt-3"><PaymentInstructions id={paymentId as PaymentMethodId} orderRef={orderRef} network={network} setNetwork={setNetwork} /></div>
-          </div>
-
-          <div className="card-premium mt-6 p-6">
-            <h3 className="flex items-center gap-2 text-sm font-bold text-ink">
-              <ShieldCheck className="h-5 w-5 text-royal" /> Order verification
-            </h3>
-            {proofDone ? (
-              <p className="mt-3 flex items-center gap-2 text-sm text-emerald-400">
-                <CheckCircle2 className="h-5 w-5" /> Proof received — we&apos;ll confirm your order by email shortly.
-              </p>
-            ) : manual ? (
-              <>
-                <p className="mt-2 text-sm text-muted">
-                  After sending payment, upload your proof of payment (screenshot or receipt) so we can
-                  verify and ship faster.
-                </p>
-                <label className="mt-3 flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-dashed border-line-strong bg-white/[0.02] px-4 py-6 text-sm text-muted hover:bg-white/[0.05]">
-                  {isUploading ? (
-                    <Loader2 className="h-5 w-5 animate-spin text-royal" />
-                  ) : (
-                    <Upload className="h-5 w-5" />
-                  )}
-                  {isUploading ? "Updating order..." : "Click to upload proof of payment"}
-                  <input type="file" accept="image/*,application/pdf" className="hidden" disabled={isUploading} onChange={handleProofUpload} />
-                </label>
-              </>
-            ) : (
-              <>
-                <p className="mt-2 text-sm text-muted">
-                  {method?.id === "paypal"
-                    ? "Complete payment with PayPal — your order confirms automatically once payment clears."
-                    : "Complete payment with Apple Pay — your order confirms automatically."}
-                </p>
-                <button onClick={handleProofUpload} className={buttonClasses(method?.id === "applepay" ? "outline" : "gold", "md", "mt-3 w-full")}>
-                  {method?.id === "paypal" ? "Pay Now with PayPal" : " Pay with Apple Pay"}
-                </button>
-              </>
-            )}
           </div>
 
           <div className="mt-6 flex justify-center gap-3">

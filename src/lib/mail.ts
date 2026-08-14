@@ -9,20 +9,37 @@ interface EmailPayload {
 
 let transporter: nodemailer.Transporter | null = null;
 
-function getTransporter() {
-  if (transporter) return transporter;
-  const host  = process.env.SMTP_HOST;
-  const port  = parseInt(process.env.SMTP_PORT  || "465", 10);
-  const secure = process.env.SMTP_SECURE === "true";
-  const user  = process.env.SMTP_USER;
-  const pass  = process.env.SMTP_PASS;
+function cleanEnvVal(val?: string): string {
+  if (!val) return "";
+  let v = val.trim();
+  if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+    v = v.slice(1, -1);
+  }
+  return v;
+}
 
-  if (!host || !user || !pass) {
-    console.warn("[mail] SMTP not configured — emails will be printed to console only.");
+function getTransporter() {
+  const host   = cleanEnvVal(process.env.SMTP_HOST) || "mail.raredexcards.com";
+  const port   = parseInt(cleanEnvVal(process.env.SMTP_PORT) || "465", 10);
+  const secure = process.env.SMTP_SECURE !== "false"; // default true for 465
+  const user   = cleanEnvVal(process.env.SMTP_USER) || "info@raredexcards.com";
+  const pass   = cleanEnvVal(process.env.SMTP_PASS);
+
+  if (!user || !pass) {
+    console.warn("[mail] SMTP user or pass missing — emails will be printed to console only.");
     return null;
   }
-  transporter = nodemailer.createTransport({ host, port, secure, auth: { user, pass } });
-  return transporter;
+
+  return nodemailer.createTransport({
+    host,
+    port,
+    secure,
+    auth: { user, pass },
+    tls: { rejectUnauthorized: false },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 10000,
+  });
 }
 
 export async function sendEmail({ to, subject, html, text }: EmailPayload) {

@@ -10,6 +10,7 @@ try {
 const root = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
+    output: 'standalone',
   // Pin Turbopack root — avoids "Next.js package not found" when the project
   // path contains unusual segments (e.g. a literal "~" directory).
   turbopack: {

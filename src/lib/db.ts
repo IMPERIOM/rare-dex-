@@ -1,12 +1,12 @@
 import dns from "dns";
 import { Pool } from "pg";
 
-// Ensure Node.js prioritizes IPv4 DNS resolution.
-// Prevents ENETUNREACH / ETIMEDOUT when connecting to Neon on networks without IPv6 routes.
+// Force Node.js to use IPv4 DNS resolution first.
+// Prevents network hangs on hosts without configured IPv6 routes.
 try {
   dns.setDefaultResultOrder("ipv4first");
 } catch {
-  // Ignore on Node versions where method is unavailable
+  // Ignore if unsupported in environment
 }
 
 declare global {
@@ -17,10 +17,10 @@ declare global {
 function createPool(): Pool {
   let connectionString = process.env.DATABASE_URL;
   if (!connectionString) {
-    throw new Error("DATABASE_URL is not set. Please check .env.local");
+    throw new Error("DATABASE_URL is missing in environment variables.");
   }
 
-  // Strip parameters that can cause issues with PgBouncer / Neon poolers
+  // Strip query parameters that cause handshake issues with PgBouncer / Neon poolers
   connectionString = connectionString
     .replace(/[&?]channel_binding=[^&]*/g, "")
     .replace(/[&?]sslmode=[^&]*/g, "");
@@ -28,9 +28,12 @@ function createPool(): Pool {
   return new Pool({
     connectionString,
     ssl: { rejectUnauthorized: false },
-    max: 10,
-    idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 15000, // 15s to allow Neon cold-start from idle
+    max: 20,
+    idleTimeoutMillis: 30000,          // 30s idle timeout
+    connectionTimeoutMillis: 60000,    // 60s (1 minute) connection timeout for Neon compute wake-up
+    statement_timeout: 60000,          // 60s query execution timeout
+    keepAlive: true,
+    keepAliveInitialDelayMillis: 5000,
   });
 }
 
@@ -41,25 +44,43 @@ export function getPool(): Pool {
   return global.__pgPool;
 }
 
+async function resetPool() {
+  if (global.__pgPool) {
+    try {
+      await global.__pgPool.end();
+    } catch {}
+    global.__pgPool = undefined;
+  }
+}
+
+/**
+ * Executes a parameterized SQL query with automatic 1-time retry on connection timeouts.
+ */
 export async function dbQuery(text: string, params?: any[]): Promise<{ rows: any[] }> {
   try {
     const pool = getPool();
     const result = await pool.query(text, params);
     return { rows: result.rows };
-  } catch (err: any) {
-    // If pool hit a connection reset or timeout, reset pool instance so next request reconnects
-    if (
-      err.code === "ETIMEDOUT" ||
-      err.code === "ECONNRESET" ||
-      err.code === "ENETUNREACH" ||
-      err.code === "57P01"
-    ) {
-      console.warn("[dbQuery] Connection error encountered, resetting pool:", err.code || err.message);
+  } catch (firstErr: any) {
+    const isConnErr =
+      firstErr.code === "ETIMEDOUT" ||
+      firstErr.code === "ECONNRESET" ||
+      firstErr.code === "ENETUNREACH" ||
+      firstErr.code === "57P01" ||
+      firstErr.message?.includes("timeout");
+
+    if (isConnErr) {
+      console.warn("[dbQuery] Connection drop detected, resetting pool and retrying...", firstErr.code || firstErr.message);
+      await resetPool();
       try {
-        await global.__pgPool?.end();
-      } catch {}
-      global.__pgPool = undefined;
+        const freshPool = getPool();
+        const retryResult = await freshPool.query(text, params);
+        return { rows: retryResult.rows };
+      } catch (retryErr) {
+        throw retryErr;
+      }
     }
-    throw err;
+
+    throw firstErr;
   }
 }

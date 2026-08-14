@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -208,97 +208,116 @@ export function Header() {
       {/* Mobile drawer */}
       <AnimatePresence>
         {mobileOpen && (
-          <div className="fixed inset-0 z-50 xl:hidden">
+          <div className="fixed inset-0 z-[9999]">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-black/70"
+              className="absolute inset-0 bg-black/75 backdrop-blur-md"
               onClick={() => setMobileOpen(false)}
             />
-            <motion.div
+            <motion.aside
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
-              transition={{ type: "tween", ease: "easeOut", duration: 0.28 }}
-              className="glass-strong absolute left-0 top-0 h-full w-80 max-w-[86%] overflow-y-auto p-5"
+              transition={{ type: "tween", ease: [0.22, 1, 0.36, 1], duration: 0.32 }}
+              className="bg-[#0b0e14] border-r border-line-strong absolute left-0 top-0 flex h-dvh max-h-dvh w-80 max-w-[86%] flex-col p-5 shadow-2xl overflow-hidden z-10"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Navigation Menu"
             >
-              <div className="mb-4 flex items-center justify-between">
-                <Logo tone="light" size={56} href={null} showTagline={false} />
+              {/* Header section (fixed at top of drawer) */}
+              <div className="shrink-0 mb-4 flex items-center justify-between border-b border-line pb-4">
+                <Logo tone="light" size={56} href="/" showTagline={false} />
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-lg p-1.5 text-muted hover:bg-white/10"
+                  className="rounded-lg p-2 text-muted hover:bg-white/10 hover:text-ink"
                   aria-label="Close menu"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-6 w-6" />
                 </button>
               </div>
 
-              <button
-                onClick={() => { setMobileOpen(false); openCart(); }}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-royal to-violet px-5 py-3 text-sm font-semibold text-white"
-              >
-                <ShoppingCart className="h-4 w-4" /> View Cart ({count})
-              </button>
+              {/* Scrollable inner content area */}
+              <div className="flex-1 overflow-y-auto min-h-0 pr-1 space-y-4">
+                <div className="flex flex-col gap-2">
+                  <button
+                    onClick={() => { setMobileOpen(false); openCart(); }}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-royal via-indigo-600 to-violet px-5 py-3 text-sm font-semibold text-white shadow-lg"
+                  >
+                    <ShoppingCart className="h-4 w-4" /> View Cart ({count})
+                  </button>
 
-              <nav className="mt-6 space-y-1">
-                {NAV.map((item) => (
-                  <div key={item.label} className="border-b border-line pb-2">
-                    <div className="flex items-center gap-2 px-1 py-2">
-                      {item.href ? (
-                        <Link
-                          href={item.href}
-                          onClick={() => setMobileOpen(false)}
-                          className="text-sm font-bold uppercase tracking-wide text-ink"
-                        >
-                          {item.label}
-                        </Link>
-                      ) : (
-                        <span className="text-sm font-bold uppercase tracking-wide text-ink">
-                          {item.label}
-                        </span>
-                      )}
-                      {item.badge && (
-                        <span className={cn("rounded-full px-1.5 py-[1px] text-[8px] font-bold uppercase", item.badge.cls)}>
-                          {item.badge.text}
-                        </span>
+                  <a
+                    href={SITE.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#25D366]/40 bg-[#25D366]/10 px-5 py-2.5 text-sm font-semibold text-[#25D366] hover:bg-[#25D366]/20"
+                  >
+                    <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
+                  </a>
+                </div>
+
+                <nav className="space-y-2">
+                  {NAV.map((item) => (
+                    <div key={item.label} className="border-b border-line/60 pb-3">
+                      <div className="flex items-center gap-2 px-1 py-1.5">
+                        {item.href ? (
+                          <Link
+                            href={item.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="text-sm font-bold uppercase tracking-wide text-ink hover:text-gold"
+                          >
+                            {item.label}
+                          </Link>
+                        ) : (
+                          <span className="text-sm font-bold uppercase tracking-wide text-ink">
+                            {item.label}
+                          </span>
+                        )}
+                        {item.badge && (
+                          <span className={cn("rounded-full px-1.5 py-[1px] text-[8px] font-bold uppercase", item.badge.cls)}>
+                            {item.badge.text}
+                          </span>
+                        )}
+                      </div>
+                      {item.items && (
+                        <div className="mt-1 grid grid-cols-1 gap-1 pl-2">
+                          {item.items.map((sub) => (
+                            <Link
+                              key={sub.label}
+                              href={sub.href}
+                              onClick={() => setMobileOpen(false)}
+                              className="rounded-lg px-3 py-1.5 text-sm text-muted hover:bg-white/[0.08] hover:text-ink"
+                            >
+                              {sub.label}
+                            </Link>
+                          ))}
+                        </div>
                       )}
                     </div>
-                    {item.items && (
-                      <div className="grid grid-cols-1">
-                        {item.items.map((sub) => (
-                          <Link
-                            key={sub.label}
-                            href={sub.href}
-                            onClick={() => setMobileOpen(false)}
-                            className="rounded-lg px-3 py-1.5 text-sm text-muted hover:bg-white/[0.06] hover:text-ink"
-                          >
-                            {sub.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </nav>
+                  ))}
+                </nav>
 
-              <div className="mt-4 grid grid-cols-1 gap-0.5">
-                {[
-                  { label: "Wholesale Program", href: "/wholesale-program" },
-                  { label: "Brands", href: "/brands" },
-                  { label: "Contact", href: "/contact" },
-                ].map((n) => (
-                  <Link
-                    key={n.href}
-                    href={n.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="rounded-lg px-3 py-2 text-sm text-muted hover:bg-white/[0.06] hover:text-ink"
-                  >
-                    {n.label}
-                  </Link>
-                ))}
+                <div className="border-t border-line pt-4 space-y-1 pb-4">
+                  {[
+                    { label: "Shop All Catalog", href: "/shop" },
+                    { label: "Wholesale Program", href: "/wholesale-program" },
+                    { label: "Brands & Sets", href: "/brands" },
+                    { label: "Contact Us", href: "/contact" },
+                  ].map((n) => (
+                    <Link
+                      key={n.href}
+                      href={n.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="block rounded-lg px-3 py-2 text-sm font-medium text-muted hover:bg-white/[0.08] hover:text-ink"
+                    >
+                      {n.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </motion.div>
+            </motion.aside>
           </div>
         )}
       </AnimatePresence>

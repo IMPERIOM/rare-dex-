@@ -85,9 +85,13 @@ export async function POST(request: Request) {
       }
     }
 
-    // 3. Customer Confirmation Email
-    try {
-      await sendEmail({
+    // 3. Trigger email notifications asynchronously (non-blocking)
+    const adminEmail = process.env.ADMIN_EMAIL || "info@raredexcards.com";
+    const parsedLines = typeof order.lines === "string" ? JSON.parse(order.lines) : order.lines;
+    const parsedAddr = typeof order.shipping_address === "string" ? JSON.parse(order.shipping_address) : order.shipping_address;
+
+    Promise.allSettled([
+      sendEmail({
         to: order.email,
         subject: `RareDexCards — Order Confirmed: ${order.ref}`,
         html: getOrderConfirmationHtml({
@@ -98,20 +102,11 @@ export async function POST(request: Request) {
           subtotal_eur: Number(order.subtotal_eur),
           shipping_eur: Number(order.shipping_eur),
           total_eur: Number(order.total_eur),
-          lines: typeof order.lines === "string" ? JSON.parse(order.lines) : order.lines,
-          shipping_address: typeof order.shipping_address === "string"
-            ? JSON.parse(order.shipping_address)
-            : order.shipping_address,
+          lines: parsedLines,
+          shipping_address: parsedAddr,
         }),
-      });
-    } catch (e: any) {
-      console.error("Customer confirmation email failed:", e.message);
-    }
-
-    // 4. Admin Alert Email
-    try {
-      const adminEmail = process.env.ADMIN_EMAIL || "info@raredexcards.com";
-      await sendEmail({
+      }),
+      sendEmail({
         to: adminEmail,
         subject: `[New Order] ${order.ref} — ${order.customer_name}`,
         html: getAdminOrderAlertHtml({
@@ -123,16 +118,18 @@ export async function POST(request: Request) {
           subtotal_eur: Number(order.subtotal_eur),
           shipping_eur: Number(order.shipping_eur),
           total_eur: Number(order.total_eur),
-          lines: typeof order.lines === "string" ? JSON.parse(order.lines) : order.lines,
-          shipping_address: typeof order.shipping_address === "string"
-            ? JSON.parse(order.shipping_address)
-            : order.shipping_address,
+          lines: parsedLines,
+          shipping_address: parsedAddr,
           order_notes: order.order_notes,
         }),
+      }),
+    ]).then(results => {
+      results.forEach((res, idx) => {
+        if (res.status === "rejected") {
+          console.error(`[orders/route] Email ${idx === 0 ? "Customer" : "Admin"} dispatch failed:`, res.reason);
+        }
       });
-    } catch (e: any) {
-      console.error("Admin alert email failed:", e.message);
-    }
+    });
 
     return NextResponse.json(
       { success: true, ref: order.ref, id: order.id, order },
