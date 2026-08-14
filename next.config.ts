@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 import path from "path";
 import { fileURLToPath } from "url";
+import dns from "dns";
+
+try {
+  dns.setDefaultResultOrder("ipv4first");
+} catch {}
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 
