@@ -19,7 +19,7 @@ export const SITE = {
   email: "wholesale@raredexcards.com",
   salesEmail: "sales@raredexcards.com",
   whatsapp: "+44 7852 947282",
-  whatsappUrl: "https://wa.me/447852947282",
+  whatsappUrl: "https://wa.link/lxsr8v",
   phone: "+44 7852 947282",
   hours: "Mon–Fri, 9:00–18:00 (EST)",
   warehouse: "Global fulfillment — US, EU & Asia distribution hubs",

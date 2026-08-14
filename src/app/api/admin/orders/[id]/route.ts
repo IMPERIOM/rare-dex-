@@ -28,7 +28,7 @@ export async function PATCH(
   const { id } = await params;
   const body = await request.json();
 
-  const allowed = ["status", "payment_instructions", "proof_uploaded", "proof_url", "order_notes", "payment_details"];
+  const allowed = ["status", "payment_details", "proof_uploaded", "proof_url", "order_notes"];
   const fields: string[] = [];
   const values: any[] = [];
 
@@ -56,8 +56,10 @@ export async function PATCH(
           to: order.email,
           subject: `RareDexCards — Your Order ${order.ref} is now ${order.status}`,
           html: getOrderStatusUpdateHtml({
-            ...order,
-            customer_first_name: (order.customer_name || "Customer").split(" ")[0],
+            ref: order.ref,
+            customer_name: order.customer_name || "Customer",
+            email: order.email,
+            status: order.status,
           }),
         });
       } catch (mailErr) {

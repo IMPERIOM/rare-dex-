@@ -17,24 +17,29 @@ export async function POST(
     if (orderResult.rows.length === 0) return NextResponse.json({ error: "Order not found" }, { status: 404 });
     const order = orderResult.rows[0];
 
+    // Save payment details and timestamp
     await dbQuery(
-      "UPDATE orders SET payment_instructions = $1, payment_email_sent_at = NOW(), payment_details = $1 WHERE id = $2",
+      "UPDATE orders SET payment_details = $1, payment_email_sent_at = NOW() WHERE id = $2",
       [instructions, id]
     );
 
-    const lines = Array.isArray(order.lines) ? order.lines : JSON.parse(order.lines || "[]");
+    const lines = Array.isArray(order.lines)
+      ? order.lines
+      : (typeof order.lines === "string" ? JSON.parse(order.lines || "[]") : []);
 
     await sendEmail({
       to: order.email,
       subject: `RareDexCards — Payment Details for Order ${order.ref}`,
       html: getPaymentRequestHtml(
         {
-          ...order,
-          customer_first_name: (order.customer_name || "Customer").split(" ")[0],
-          total: order.total_eur,
-          subtotal: order.subtotal_eur,
-          shipping_cost: order.shipping_eur,
-          items: lines.map((l: any) => ({ name: l.product_name || l.name, quantity: l.qty || l.quantity || 1, price: l.unit_price || l.price || 0 })),
+          ref: order.ref,
+          customer_name: order.customer_name || "Customer",
+          email: order.email,
+          payment_method: order.payment_method,
+          total_eur: Number(order.total_eur),
+          subtotal_eur: Number(order.subtotal_eur),
+          shipping_eur: Number(order.shipping_eur),
+          lines: lines,
         },
         instructions
       ),

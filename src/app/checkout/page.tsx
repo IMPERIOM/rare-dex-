@@ -337,11 +337,6 @@ export default function CheckoutPage() {
               })}
             </div>
 
-            {method && (
-              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-4">
-                <PaymentInstructions id={method.id} orderRef="(shown after you place the order)" network={network} setNetwork={setNetwork} preview />
-              </motion.div>
-            )}
           </Section>
 
           <Section title="Before Placing Your Order" step={4}>

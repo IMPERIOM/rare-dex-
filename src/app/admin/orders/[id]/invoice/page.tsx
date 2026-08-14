@@ -20,14 +20,14 @@ export default async function InvoicePage({
     if (Array.isArray(raw)) return raw;
     try { return JSON.parse(raw || "[]"); } catch { return []; }
   }
-  function parseAddr(raw: any): Record<string, string> {
+  function parseAddr(raw: any): Record<string, string | undefined> {
     if (!raw) return {};
     if (typeof raw === "object") return raw;
     try { return JSON.parse(raw); } catch { return {}; }
   }
 
   const lines = parseLines(order.lines);
-  const addr  = parseAddr(order.shipping_address);
+  const addr = parseAddr(order.shipping_address);
 
   function fmtUSD(n: number) {
     return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
@@ -36,7 +36,7 @@ export default async function InvoicePage({
     return new Date(s).toLocaleString("en-US", { dateStyle: "long", timeStyle: "short" });
   }
 
-  const ref = order.ref || order.id.slice(0, 8).toUpperCase();
+  const ref = order.ref || String(order.id);
 
   return (
     <html lang="en">

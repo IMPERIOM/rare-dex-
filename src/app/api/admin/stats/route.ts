@@ -47,6 +47,7 @@ export async function GET() {
       topProducts: topProducts.rows,
     });
   } catch (err: any) {
+    console.error("GET admin stats error:", err.message);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
