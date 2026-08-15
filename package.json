@@ -7,7 +7,6 @@
     "dev:turbo": "next dev",
     "build": "next build",
     "start": "next start",
-    "test:email": "node scripts/test-email.js",
     "lint": "eslint"
   },
   "dependencies": {

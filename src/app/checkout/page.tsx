@@ -232,8 +232,8 @@ export default function CheckoutPage() {
     <>
       <PageHero eyebrow="Secure Checkout" title="Checkout" subtitle="Complete your order details and choose a payment method. Payment options adapt to your country automatically." />
 
-      <form onSubmit={placeOrder} className="mx-auto grid max-w-6xl gap-8 px-4 py-12 lg:grid-cols-[1.4fr_1fr]">
-        <div className="space-y-8">
+      <form onSubmit={placeOrder} className="mx-auto grid max-w-7xl gap-8 px-4 py-10 grid-cols-1 lg:grid-cols-12 items-start">
+        <div className="min-w-0 space-y-8 lg:col-span-7 xl:col-span-7">
           <Section title="Customer Information" step={1}>
             <div className="grid gap-3 sm:grid-cols-2">
               <input required value={firstName} onChange={e => setFirstName(e.target.value)} placeholder="First name" className={inputCls} />
@@ -318,7 +318,7 @@ export default function CheckoutPage() {
           </Section>
         </div>
 
-        <aside className="h-fit lg:sticky lg:top-24">
+        <aside className="min-w-0 h-fit lg:sticky lg:top-24 lg:col-span-5 xl:col-span-5">
           <div className="card-premium p-6">
             <h2 className="text-base font-bold text-ink">Order Summary</h2>
             <ul className="mt-4 space-y-3">

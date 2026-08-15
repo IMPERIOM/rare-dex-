@@ -19,6 +19,8 @@ function cleanEnvVal(val?: string): string {
 }
 
 function getTransporter() {
+  if (transporter) return transporter;
+
   const host   = cleanEnvVal(process.env.SMTP_HOST) || "mail.raredexcards.com";
   const port   = parseInt(cleanEnvVal(process.env.SMTP_PORT) || "465", 10);
   const secure = process.env.SMTP_SECURE !== "false"; // default true for 465
@@ -30,7 +32,7 @@ function getTransporter() {
     return null;
   }
 
-  return nodemailer.createTransport({
+  transporter = nodemailer.createTransport({
     host,
     port,
     secure,
@@ -40,6 +42,8 @@ function getTransporter() {
     greetingTimeout: 10000,
     socketTimeout: 10000,
   });
+
+  return transporter;
 }
 
 export async function sendEmail({ to, subject, html, text }: EmailPayload) {
