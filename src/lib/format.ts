@@ -16,7 +16,7 @@ export const SITE = {
   tagline: "Your Trusted Global Pokémon Wholesale Partner",
   blurb:
     "Supplying authentic Pokémon TCG products in bulk to retailers, distributors, and resellers worldwide.",
-  email: "wholesale@raredexcards.com",
+  email: "info@raredexcards.com",
   salesEmail: "sales@raredexcards.com",
   whatsapp: "+44 7852 947282",
   whatsappUrl: "https://wa.link/lxsr8v",

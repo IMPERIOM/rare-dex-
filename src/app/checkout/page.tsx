@@ -22,8 +22,7 @@ const inputCls =
   "w-full rounded-lg border border-line-strong bg-white/[0.03] px-3.5 py-2.5 text-sm text-ink outline-none placeholder:text-faint focus:border-royal";
 
 const METHOD_ICON: Record<PaymentMethodId, typeof Landmark> = {
-  zelle: Send, "bank-ach": Landmark, "bank-sepa": Landmark, "bank-swift": Landmark,
-  revolut: CreditCard, paypal: CreditCard, applepay: Smartphone, btc: Coins, usdt: Wallet,
+  "bank-ach": Landmark, "bank-sepa": Landmark, "bank-swift": Landmark, btc: Coins,
 };
 
 function CopyRow({ label, value }: { label: string; value: string }) {
@@ -148,7 +147,7 @@ export default function CheckoutPage() {
           delivery_instructions: deliveryInstructions || null,
           order_notes: orderNotes || null,
           payment_method: method?.label || "Manual Payment",
-          payment_network: paymentId === "usdt" ? network : null,
+          payment_network: null,
           subtotal,
           shipping,
           total,
@@ -421,13 +420,6 @@ function PaymentInstructions({
     <div className="rounded-xl border border-line bg-white/[0.02] p-4">
       <Note />
       <div className="space-y-2">
-        {id === "zelle" && (
-          <>
-            <CopyRow label="Recipient name" value={PAY_INFO.zelle.recipient} />
-            <CopyRow label="Zelle email" value={PAY_INFO.zelle.email} />
-            <CopyRow label="Reference" value={orderRef} />
-          </>
-        )}
         {id === "bank-ach" && (
           <>
             <CopyRow label="Bank name" value={PAY_INFO.bankAch.bankName} />
@@ -455,39 +447,12 @@ function PaymentInstructions({
             <CopyRow label="Payment reference" value={orderRef} />
           </>
         )}
-        {id === "revolut" && <CopyRow label="RevTag" value={PAY_INFO.revolut.revtag} />}
-        {id === "paypal" && (
-          <>
-            <CopyRow label="PayPal email" value={PAY_INFO.paypal.email} />
-            {!preview && <button type="button" className={buttonClasses("gold", "md", "mt-1 w-full")}>Pay Now with PayPal</button>}
-          </>
-        )}
-        {id === "applepay" && (
-          <p className="text-sm text-muted">One-click Apple Pay checkout is available on the confirmation step.</p>
-        )}
         {id === "btc" && (
           <div className="flex flex-col items-start gap-3 sm:flex-row">
             <Qr data={PAY_INFO.btc.address} />
             <div className="min-w-0 flex-1 space-y-2">
               <p className="text-xs font-semibold text-muted">Network: Bitcoin (BTC)</p>
               <CopyRow label="BTC wallet address" value={PAY_INFO.btc.address} />
-            </div>
-          </div>
-        )}
-        {id === "usdt" && (
-          <div className="space-y-3">
-            <div className="flex gap-2">
-              {Object.keys(PAY_INFO.usdt.networks).map((n) => (
-                <button key={n} type="button" onClick={() => setNetwork(n)} className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${network === n ? "border-royal bg-royal/15 text-ink" : "border-line text-muted hover:text-ink"}`}>
-                  USDT {n}
-                </button>
-              ))}
-            </div>
-            <div className="flex flex-col items-start gap-3 sm:flex-row">
-              <Qr data={PAY_INFO.usdt.networks[network]} />
-              <div className="min-w-0 flex-1">
-                <CopyRow label={`USDT ${network} address`} value={PAY_INFO.usdt.networks[network]} />
-              </div>
             </div>
           </div>
         )}

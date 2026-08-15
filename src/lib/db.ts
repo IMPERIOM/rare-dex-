@@ -1,62 +1,40 @@
-import dns from "dns";
-import { neon } from "@neondatabase/serverless";
 import { Pool } from "pg";
 
-// Force Node.js IPv4 DNS resolution
-try {
-  dns.setDefaultResultOrder("ipv4first");
-} catch {}
+let pool: Pool | null | undefined;
 
-declare global {
-  // eslint-disable-next-line no-var
-  var __pgPool: Pool | undefined;
-}
-
-function getPgPool(): Pool {
-  if (!global.__pgPool) {
-    let connectionString = process.env.DATABASE_URL || "";
-    connectionString = connectionString
-      .replace(/[&?]channel_binding=[^&]*/g, "")
-      .replace(/[&?]sslmode=[^&]*/g, "");
-
-    global.__pgPool = new Pool({
-      connectionString,
-      ssl: { rejectUnauthorized: false },
-      max: 10,
-      idleTimeoutMillis: 10000,
-      connectionTimeoutMillis: 15000,
-      keepAlive: true,
-    });
+/** Neon (and any hosted Postgres) needs TLS; local sockets/loopback don't. */
+function needsSsl(url: string): boolean {
+  if (/sslmode=(disable|off)/i.test(url)) return false;
+  try {
+    const host = new URL(url).hostname;
+    return host !== "localhost" && host !== "127.0.0.1" && host !== "::1";
+  } catch {
+    // Non-URL connection strings (e.g. socket paths) — assume local, no TLS.
+    return false;
   }
-  return global.__pgPool;
 }
 
-/**
- * Executes parameterized SQL query using Neon Serverless HTTP driver first.
- * Bypasses TCP port 5432 socket timeouts (ETIMEDOUT / ENETUNREACH) completely.
- */
+export function getDb(): Pool | null {
+  if (pool !== undefined) return pool;
+  const url = process.env.DATABASE_URL;
+  pool = url
+    ? new Pool({
+        connectionString: url,
+        max: 5,
+        // Neon free-tier compute scale-to-zero: a cold start can take a
+        // few seconds to wake, so give it more room than pg's default.
+        connectionTimeoutMillis: 15000,
+        ssl: needsSsl(url) ? { rejectUnauthorized: false } : undefined,
+      })
+    : null;
+  return pool;
+}
+
 export async function dbQuery(text: string, params?: any[]): Promise<{ rows: any[] }> {
-  const connectionString = process.env.DATABASE_URL;
-  if (!connectionString) {
-    throw new Error("DATABASE_URL is missing in environment variables.");
+  const db = getDb();
+  if (!db) {
+    throw new Error("DATABASE_URL is missing or database pool not initialized.");
   }
-
-  // 1. Primary: Neon HTTP driver (Communicates via HTTPS Port 443 — immune to TCP 5432 timeouts)
-  try {
-    const sql = neon(connectionString);
-    const result = await sql(text, params ?? []);
-    return { rows: Array.isArray(result) ? result : [] };
-  } catch (httpErr: any) {
-    console.warn("[dbQuery] Neon HTTP query failed, trying PG TCP pool:", httpErr.message || httpErr);
-  }
-
-  // 2. Secondary Fallback: standard PG TCP pooler
-  try {
-    const pool = getPgPool();
-    const res = await pool.query(text, params ?? []);
-    return { rows: res.rows };
-  } catch (pgErr: any) {
-    console.error("[dbQuery] Both HTTP and TCP database queries failed:", pgErr.message || pgErr);
-    throw pgErr;
-  }
+  const result = await db.query(text, params);
+  return { rows: result.rows };
 }
